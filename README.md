@@ -13,7 +13,7 @@ Updations and Implementations done:
 Appium setup on Mac - Android:
 ------------------------------------------------------------
 Softwares:
-----------------------adb
+----------------------
 <b>HomeBrew</b>
 
 1. Package manager for mac OS; used to install Software packages
