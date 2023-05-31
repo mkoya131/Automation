@@ -1,6 +1,7 @@
 package tests;
 
 import logging.Log;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -17,8 +18,10 @@ import pages.LoginPage;
 import pages.TeamDetailsPage;
 
 public class AppTest {
-	SoftAssert softAssert;
 
+	private static Logger logger = Log.getNamedLogger(AppTest.class.getSimpleName());
+
+	SoftAssert softAssert;
 	public DriverFactory driverFactory;
 	public AppiumDriver<MobileElement> driver;
 	public AppPage appPage;
@@ -40,19 +43,19 @@ public class AppTest {
 
 	@Test(alwaysRun = true)
 	public void verifyTeam() throws Exception {
-		Log.info(TAG, "Execution is starting");
+		logger.debug("On Get Started Page");
 		loginPage.clickOnGetStarted();
 		leaguesPage.clickOnContinue();
 		leaguesPage.clickOnFollowIcon();
-		Log.debug(TAG,"Marked GSW as fav team");
+		logger.debug("Marked GSW as fav team");
 		leaguesPage.clickOnContinue();
 		leaguesPage.clickOnDone();
-		Log.debug(TAG,"Navigated to HomePage");
+		logger.debug("Navigated to HomePage");
 		appPage.cancelPopup();
-		Log.debug(TAG,"Clicked on ON region cancel pop");
+		logger.debug("Clicked on ON region cancel pop");
 		appPage.searchTeam();
 		appPage.clickOnTeam();
-		Log.debug(TAG,"Searched and selected the team");
+		logger.debug("Searched and selected the team");
 		softAssert.assertEquals(appPage.getTeamName(), Config.TEAM, "Team page is not opened");
 		teamDetailsPage.clickOnTeamStats();
 		softAssert.assertTrue(teamDetailsPage.isTeamStatsSelected(), "Team stats is not selected");

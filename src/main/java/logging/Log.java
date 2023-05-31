@@ -1,51 +1,46 @@
 package logging;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.config.Configurator;
 
 
 public class Log {
-    private static Logger logger = Logger.getLogger(Log.class.getSimpleName());
-    /**
-     * Log level:ERROR
-     * @param tag
-     * @param msg
-     */
-    public static void error(String tag, String msg){
-        System.out.println("ERROR:" +tag + ": " + msg);
-        logger.error("ERROR:" + ": " +msg);
-    }
+    private static Logger logger = Log.getNamedLogger(Log.class.getSimpleName());
 
-    /**
-     * Log level:WARN
-     * @param tag
-     * @param msg
-     */
-    public static void warn(String tag, String msg){
-        System.out.println("WARN:" +tag + ": " + msg);
-        logger.warn("WARN:" + tag + ": " +msg);
-    }
-    /**
-     * Log level:INFO
-     * @param tag
-     * @param msg
-     */
-    public static void info(String tag,String msg){
-        System.out.println("INFO:" +tag +": " + msg);
-        logger.info("INFO:" +tag + ": " +msg);
-    }
     /**
      * Log level:DEBUG
-     * @param tag
-     * @param msg
+     * @param logger
+     * @param level
      */
-    public static void debug(String tag, String msg){
-        System.out.println("DEBUG:" +tag + ": " + msg);
-        logger.debug("DEBUG:" +tag + ": " +msg);
-
+    public static void setLogLevel(Logger logger, String level){
+        Level logLevel = Level.ERROR;
+        switch (level.toUpperCase()){
+            case "ERROR":
+                  break;
+            case "DEBUG":
+                logLevel = Level.DEBUG;
+                break;
+            case "OFF":
+                logLevel = Level.OFF;
+                break;
+            case "WARN":
+                logLevel = Level.WARN;
+                break;
+            case "INFO":
+                logLevel = Level.INFO;
+                break;
+            default:
+                break;
+        }
     }
 
-    public static void testng(String msg){
-
+    public static void setLevel(Logger logger, Level level){
+        Configurator.setLevel(logger.getName(), level);
+    }
+    public static Logger getNamedLogger(String name) {
+        return LogManager.getLogger(name);
     }
 }

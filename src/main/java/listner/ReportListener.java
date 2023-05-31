@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.IClassListener;
@@ -35,6 +36,7 @@ import utils.FileOperations;
 
 public class ReportListener implements ITestListener, IClassListener, ISuiteListener {
 
+	private static Logger logger = logging.Log.getNamedLogger(ReportListener.class.getSimpleName());
 	private ExtentReports extent;
 	private ExtentHtmlReporter htmlReporter;
 	private String extentScreen = null;
@@ -96,7 +98,7 @@ public class ReportListener implements ITestListener, IClassListener, ISuiteList
 		String methodName = result.getName().trim();
 		String filePath = System.getProperty("user.dir") + "/Extent Reports/Passed Screenshots/";
 		takeScreenShot(filePath, methodName, driverMap.get(result.getTestClass().getRealClass().getSimpleName()));
-		org.apache.log4j.Logger.getRootLogger().setLevel(org.apache.log4j.Level.OFF);
+		logging.Log.setLogLevel(logger,"OFF");
 		Log logObj = new Log(getTest(Reporter.getCurrentTestResult().getInstanceName().replace(".", " ")
 				.split(" ")[Reporter.getCurrentTestResult().getInstanceName().replace(".", " ").split(" ").length - 1]
 						.trim()));
@@ -122,7 +124,7 @@ public class ReportListener implements ITestListener, IClassListener, ISuiteList
 		String filePath = System.getProperty("user.dir") + "/Extent Reports/Failure Screenshots/";
 		System.out.println(driverMap.get(result.getTestClass().getRealClass().getSimpleName()));
 		takeScreenShot(filePath, methodName, driverMap.get(result.getTestClass().getRealClass().getSimpleName()));
-		org.apache.log4j.Logger.getRootLogger().setLevel(org.apache.log4j.Level.OFF);
+		logging.Log.setLogLevel(logger,"OFF");
 		Log logObj = new Log(getTest(Reporter.getCurrentTestResult().getInstanceName().replace(".", " ")
 				.split(" ")[Reporter.getCurrentTestResult().getInstanceName().replace(".", " ").split(" ").length - 1]
 						.trim()));
@@ -147,8 +149,7 @@ public class ReportListener implements ITestListener, IClassListener, ISuiteList
 		String filePath = System.getProperty("user.dir") + "/Extent Reports/Skip Screenshots/";
 		System.out.println(driverMap.get(result.getTestClass().getRealClass().getSimpleName()));
 		takeScreenShot(filePath, methodName, driverMap.get(result.getTestClass().getRealClass().getSimpleName()));
-		
-		org.apache.log4j.Logger.getRootLogger().setLevel(org.apache.log4j.Level.OFF);
+		logging.Log.setLogLevel(logger,"OFF");
 		Log logObj = new Log(getTest(Reporter.getCurrentTestResult().getInstanceName().replace(".", " ")
 				.split(" ")[Reporter.getCurrentTestResult().getInstanceName().replace(".", " ").split(" ").length - 1]
 						.trim()));
@@ -242,7 +243,7 @@ public class ReportListener implements ITestListener, IClassListener, ISuiteList
 	}
 
 	public static void logToReport(String msg) {
-		org.apache.log4j.Logger.getRootLogger().setLevel(org.apache.log4j.Level.OFF);
+		logging.Log.setLogLevel(logger,"OFF");
 		Log logObj = new Log(getTest(Reporter.getCurrentTestResult().getInstanceName().replace(".", " ")
 				.split(" ")[Reporter.getCurrentTestResult().getInstanceName().replace(".", " ").split(" ").length - 1]
 						.trim()));
