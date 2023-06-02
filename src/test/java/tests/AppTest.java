@@ -51,8 +51,6 @@ public class AppTest {
 		leaguesPage.clickOnContinue();
 		leaguesPage.clickOnDone();
 		logger.debug("Navigated to HomePage");
-		appPage.cancelPopup();
-		logger.debug("Clicked on ON region cancel pop");
 		appPage.searchTeam();
 		appPage.clickOnTeam();
 		logger.debug("Searched and selected the team");

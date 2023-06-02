@@ -43,8 +43,9 @@ public class AppPage extends BasePage {
 	//By playerStats = By.xpath("//android.widget.LinearLayout[@content-desc=\"Player Stats\"]/android.widget.TextView");
 
 	public void searchTeam() throws InterruptedException {
-		clickWhenElementVisible(searchBox, 20);
-		enterData(searchField, Config.TEAM);
+			clickWhenElementVisible(searchBox, 20);
+			enterData(searchField, Config.TEAM);
+
 	}
 
 	public String getTeamName() {
